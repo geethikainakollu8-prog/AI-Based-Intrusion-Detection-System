@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Intrusion Detection Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🛡 AI Intrusion Detection Dashboard</h1>
+
+<p class="subtitle">
+Real-Time Network Security Investigation Report
+</p>
+
+<!-- Threat Banner -->
+
+{% if prediction=="Attack Detected" %}
+
+<div class="danger">
+
+<i class="fa-solid fa-triangle-exclamation"></i>
+
+HIGH THREAT DETECTED
+
+</div>
+
+{% else %}
+
+<div class="safe">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+NETWORK IS SAFE
+
+</div>
+
+{% endif %}
+
+<!-- Dashboard Cards -->
+
+<div class="cards">
+
+<div class="card">
+<i class="fa-solid fa-brain fa-2x"></i>
+
+<h3>AI Model</h3>
+
+<p>Random Forest</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-gauge-high fa-2x"></i>
+
+<h3>Confidence</h3>
+
+<p id="confidence">{{ confidence }}</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-circle-radiation fa-2x"></i>
+
+<h3>Risk Level</h3>
+
+<p>{{ risk }}</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-database fa-2x"></i>
+
+<h3>Total Records</h3>
+
+<p>{{ total_records }}</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-bug fa-2x"></i>
+
+<h3>Attack Records</h3>
+
+<p>{{ attack_count }}</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-shield fa-2x"></i>
+
+<h3>Normal Records</h3>
+
+<p>{{ normal_count }}</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-chart-pie fa-2x"></i>
+
+<h3>Attack %</h3>
+
+<p>{{ attack_percentage }}%</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-calendar fa-2x"></i>
+
+<h3>Analysis Time</h3>
+
+<p>{{ analysis_date }}</p>
+
+</div>
+
+</div>
+
+<br><br>
+
+<!-- Charts -->
+
+<div class="chart-container">
+
+<canvas id="pieChart"></canvas>
+
+</div>
+
+<br>
+
+<!-- Summary -->
+
+<div class="recommendation">
+
+<h2>
+
+<i class="fa-solid fa-file-shield"></i>
+
+Investigation Summary
+
+</h2>
+
+<p>
+
+The uploaded network traffic has been successfully analyzed using a
+Random Forest Machine Learning model trained on the NSL-KDD dataset.
+
+</p>
+
+<br>
+
+<ul>
+
+<li>✔ AI completed intrusion analysis successfully.</li>
+
+<li>✔ Threat confidence evaluated.</li>
+
+<li>✔ Network risk calculated.</li>
+
+<li>✔ Security recommendations generated.</li>
+
+</ul>
+
+</div>
+
+<br>
+
+<div class="recommendation">
+
+<h2>
+
+<i class="fa-solid fa-lock"></i>
+
+Security Recommendations
+
+</h2>
+
+<ul>
+
+<li>🔒 Block suspicious IP addresses</li>
+
+<li>🛡 Enable Firewall Protection</li>
+
+<li>📈 Monitor abnormal traffic</li>
+
+<li>🧹 Perform malware scanning</li>
+
+<li>🔄 Update IDS signatures</li>
+
+<li>👨‍💻 Notify Security Administrator</li>
+
+</ul>
+
+</div>
+
+<br>
+
+<div style="text-align:center;">
+
+<a href="/download-report" class="btn">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+Download PDF
+
+</a>
+
+<a href="/history" class="btn">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+View History
+
+</a>
+
+<a href="/" class="btn">
+
+<i class="fa-solid fa-rotate-left"></i>
+
+Analyze Again
+
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+new Chart(document.getElementById("pieChart"),{
+
+type:"doughnut",
+
+data:{
+
+labels:["Attack","Normal"],
+
+datasets:[{
+
+data:[{{ attack_count }},{{ normal_count }}],
+
+backgroundColor:[
+
+"#ff4da6",
+
+"#5dff9d"
+
+],
+
+borderWidth:2
+
+}]
+
+},
+
+options:{
+
+plugins:{
+
+legend:{
+
+labels:{
+
+color:"white",
+
+font:{
+
+size:16
+
+}
+
+}
+
+}
+
+}
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>

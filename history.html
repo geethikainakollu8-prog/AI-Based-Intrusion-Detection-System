@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🕘 Analysis History</h1>
+
+    <p class="subtitle">Previous intrusion detection scans</p>
+
+    <div style="text-align:center; margin: 20px 0;">
+        <a href="/" class="btn"><i class="fa-solid fa-house"></i> Back Home</a>
+        <a href="/clear-history" class="btn"><i class="fa-solid fa-trash"></i> Clear History</a>
+    </div>
+
+    {% if entries %}
+        <div class="history-list">
+            {% for item in entries %}
+                <div class="history-card">
+                    <div class="history-header">
+                        <span class="history-badge {{ 'danger' if item.prediction == 'Attack Detected' else 'safe' }}">
+                            {{ item.prediction }}
+                        </span>
+                        <span class="history-time">{{ item.date }}</span>
+                    </div>
+
+                    <div class="history-meta">
+                        <p><strong>File:</strong> {{ item.file_name }}</p>
+                        <p><strong>Risk:</strong> {{ item.risk }}</p>
+                        <p><strong>Confidence:</strong> {{ item.confidence }}%</p>
+                    </div>
+
+                    <div class="history-stats">
+                        <span>Total: {{ item.total_records }}</span>
+                        <span>Attack: {{ item.attack_count }}</span>
+                        <span>Normal: {{ item.normal_count }}</span>
+                        <span>Attack %: {{ item.attack_percentage }}%</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="recommendation">
+            <h2>No analysis history yet</h2>
+            <p>Upload a dataset to begin tracking your intrusion detection scans.</p>
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

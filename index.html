@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Intrusion Detection System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="hero">
+
+    <div class="overlay">
+
+        <h1>🛡 AI Intrusion Detection System</h1>
+
+        <p>
+            Intelligent Network Threat Detection using
+            <span>Artificial Intelligence</span>
+        </p>
+
+        <div class="features">
+
+            <div class="feature-card">
+                🤖
+                <h3>AI Powered</h3>
+                <p>Random Forest Machine Learning Model</p>
+            </div>
+
+            <div class="feature-card">
+                🔒
+                <h3>Cyber Security</h3>
+                <p>Detect Malicious Network Traffic</p>
+            </div>
+
+            <div class="feature-card">
+                📊
+                <h3>Real-Time Analysis</h3>
+                <p>Instant Intrusion Investigation Report</p>
+            </div>
+
+        </div>
+
+        <div class="upload-box">
+
+            <h2>Upload NSL-KDD Test Dataset</h2>
+
+            <form action="/predict"
+                  method="POST"
+                  enctype="multipart/form-data">
+
+                <input
+                    type="file"
+                    name="file"
+                    required>
+
+                <br><br>
+
+                <button type="submit">
+
+                    🚀 Analyze Network
+
+                </button>
+
+                <a class="sample-link"
+                   href="{{ url_for('sample_file') }}">
+                    Download Sample CSV
+                </a>
+
+                <a class="sample-link"
+                   href="{{ url_for('history') }}">
+                    View Analysis History
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+
+    Developed by <b>Geethika</b> | AI-Based Intrusion Detection System
+
+</footer>
+
+</body>
+
+</html>
